@@ -1,25 +1,55 @@
 #include <iostream> 
 
-void swap_int(int* const ptr1, int* const ptr2); 
- 
-int main ()
-{ 
-    int value1 = 0, value2 = 20; 
-    int* ptr1 = &value1; 
-    int* ptr2 = NULL; 
- 
-    ptr2 = &value2; 
- 
-    std::cout << "Before : ptr1 = " << *ptr1 << " / ptr2 = " << *ptr2 << std::endl; 
-    swap_int(ptr1, ptr2); 
-    std::cout << "After  : ptr1 = " << *ptr1 << " / ptr2 = " << *ptr2 << std::endl; 
- 
-    return 0; 
-} 
- 
-void swap_int(int* ptr1, int* ptr2)
-{ 
-    int temp = *ptr1; 
-    *ptr1 = *ptr2; 
-    *ptr2 = temp; 
+class Person
+{
+public:
+    Person(int _age)
+    : age(_age)
+    {
+        
+    }
+    
+    void speak() = 0;
+private:
+    int age;
+};
+
+class Korean : public Person
+{
+public:
+    Korean(int age)
+    :Person(age)
+    {
+        
+    }
+public:
+    virtual void speak()
+    {
+        std::cout << "nae naineun " << age << " sal ibnida." << std::endl;
+    }
+};
+
+class American : public Person
+{
+public:
+    American(int age)
+    :Person(age)
+    {
+        
+    }
+    
+public:
+virtual void speak()
+    {
+        std::cout << "I am " << age << " years old." << std::endl;
+    }
+};
+
+int main()
+{
+    Korean k1(21);
+    American a1(22);
+    k1.speak();
+    a1.speak();
+    return 0;
 }
