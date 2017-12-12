@@ -1,76 +1,85 @@
 # Problem04
-ROT13 (rotate by 13 places) is a simple letter substitution cipher that is an instance of a Caesar cipher developed in ancient Rome and used by Julius Caesar who used it in his private correspondence. 
-In this problem, you should develop alternative cipher program ROT6ROT. The ROT6ROT replaces a letter with special rules. The following table demonstrates the translation rule in ROT6ROT:
-
-| Code    | Code    | Code    | Code    |
-|---------|---------|---------|---------|
-| A <-> H | B <-> I | C <-> J | D <-> K |
-| E <-> L | F <-> M | G <-> G | H <-> A |
-| I <-> B | J <-> C | K <-> D | L <-> E |
-| M <-> F | N <-> U | O <-> V | P <-> W |
-| Q <-> X | R <-> Y | S <-> Z | T <-> T |
-| U <-> N | V <-> O | W <-> P | X <-> Q |
-| Y <-> R | Z <-> S |         |         |
-
-Thus, the translation of the word JULIUS using ROT6ROT would be CNEBNZ. Write a C++ program that inputs a letter and outputs the corresponding letter using the ROT6ROT encoding scheme above concerning the following requirements.
-+ if a user enters non-alphabetic letters do not change the character.
-+ You cannot change the logic structure. You must fill in the blanks. Modification of the logic structure is strongly prohibited.
+한동 게임주식회사에서는 2018년에 새로운 게임을 개발하려고 준비하고 있습니다. 
+새로운 게임은 C++ 기반의 게임으로 주어진 item을 합쳐서 큰 item을 만드는 게임입니다. 
+예를 들면, item이 숫자라고 하였으 때 2 + 2 = 4, 4 + 2 = 6 과 같이 주어진 숫자를 합쳐서 큰 숫자를 만드는 것입니다.
+이와 같은 게임을 만들기 위해서 게임 설계자는 class 기반의 게임을 설계하였고, 다음과 같이 프로그램을 동작시킬 예정입니다. 
 
 ```
-#include <iostream>
-#include <ctype.h>
- 
+Item i1("num", 2);
+Item i2("num", 2);
+i1 = i2;
+```
+
+이상과 같은 프로그램을 만들기 위해서 설계자는 Item 클래스를 만들었고, 
+Item 클래스에 대하여 다음과 같이 class 코드를 만들었습니다. 
+```
+class Item
+{
+public:
+	Item(); // Default Constructor
+	Item(const char* name, int val); // Constructor with argument
+	Item(const Item& rhs); // Copy Constructor
+	~Item(); // Destructor
+
+public:	
+	const Item& operator=(const Item& rhs); // Assign operator overloading
+	const Item& operator=(const int val);   // Assign operator overloading
+
+public:
+	void addItem(const Item& item); // add two Item object
+	
+public:
+	void print(std::ostream& os); // print function
+
+public: // get/set function
+	int  get_value() const;
+	void set_value(const int val);
+	
+private: // member variable
+	char* m_name;
+	int   value;
+
+protected: // static variable and static functions
+	static int item_count;
+	static void increase_item_count();
+	static void decrease_item_count();
+public:
+	static void print_total_item(std::ostream& os);
+};
+
+```
+이상 클래스를 구현하여 다음 코드가 실행되도록 프로그램을 완성하시오.
+```
 int main()
 {
-	char input_buf[100];
-	char codex[26] = 
-	                {'A', 'B', 'C', 'D', 'E',
-	                 'F', 'G', 'H', 'I', 'J',
-	                 'K', 'L', 'M', 'N', 'O',
-	                 'P', 'Q', 'R', 'S', 'T', 
-	                 'U', 'V', 'W', 'X', 'Y', 'Z'};
-
-	// Get char string from console after executing following code,
-	// input_buf will contain the string data, and the input
-	std::cin.getline(input_buf, 100);
- 
-	char* c_ptr = input_buf;
-	int index = 0;
-	while((*c_ptr) != '\0')
 	{
-	    (*c_ptr) = toupper((*c_ptr));
-	    index = (*c_ptr) - 'A';
-
-		/* blank */
-		{
-			if(index < 6)
-		    {
-				*c_ptr = codex[index+7];
-		    }
-		    else if(index > 6 && index < 13)
-		    {
-		    	/* blank */
-		    }
-		    /* blank */
-		    {
-				/* blank */
-		    }
-		    /* blank */
-		    {
-				/* blank */
-		    }
-		}
-	    
-	    c_ptr++;
+		Item i1("num", 10);
+		i1.print(std::cout);
+		
+		Item::print_total_item(std::cout);
+		
+		Item i2 = i1;
+		i1 = 20;
+		i1.print(std::cout);
+		i2.print(std::cout);
+		
+		Item::print_total_item(std::cout);
+		
+		Item i3;
+		i3 = i1;
+		i1.print(std::cout);
+		i3.print(std::cout);
+		
+		Item::print_total_item(std::cout);
+		
+		i3.addItem(i2);
+		i3.print(std::cout);
+		
+		Item::print_total_item(std::cout);
 	}
-	std::cout << input_buf << std::endl;
 	
+	// Check there is no remained data object
+	Item::print_total_item(std::cout);
 	return 0;
 }
-```
-
-You may refer the output result of the program using output program.
-You may execute the 
-```
-~/workspace/midterm/Problem04 (master) $./output
 ```

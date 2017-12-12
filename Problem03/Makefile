@@ -5,5 +5,5 @@ Problem03: problem03.cpp
 	g++ -std=c++11 -c problem03.cpp -o Problem03.o
 
 clean:
-	rm *.o
-	rm Problem03
+	rm *.o -f
+	rm Problem03 -f
