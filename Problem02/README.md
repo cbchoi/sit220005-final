@@ -15,7 +15,7 @@ private:
     int age;
 };
 
-class Korean : public Person
+class Korean 
 {
 public:
     Korean(int age)
@@ -54,5 +54,4 @@ int main()
     a1.speak();
     return 0;
 }
-
 ```
