@@ -14,7 +14,7 @@ private:
     int age;
 };
 
-class Korean : public Person
+class Korean 
 {
 public:
     Korean(int age)

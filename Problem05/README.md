@@ -3,6 +3,3 @@
 다음은 간단한 객체지향 프로그램을 설계한 것이다. 다음 다이어그램(class.png)과
 출력결과(output.png)를 보고 클래스 간의 상속관계를 파악하여 객체지향 프로그램을 완성하시오. 
 주의사항. 새로운 변수와 함수는 추가할 수 없음.
-
-![Class Diagram](sit220005-final/Problem05/class.png)
-![Output Results](sit220005-final/Problem05/output.png)
